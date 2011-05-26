@@ -8,7 +8,7 @@
 var Deck = function (deckCount) {
 	this.count = (51 * deckCount)+deckCount; //example: deck=0-51  * 2 = 102 + 2<--deckCount = 204
 	this.cards = new Array(this.count);
-	for (var i = this.count; i--;) { //reversed loop for execution speed, might switch to unrolled loop
+	for (var i = this.count; i--;) {
 		this.cards[i] = i + 1;	//not creating a card at this point, just storing it's position which can later be evaluated
 	}
 };
@@ -23,7 +23,6 @@ Deck.prototype = {
 		for(var x=0;x<n;x++)
 		{
 			length = this.cards.length;
-			//might need to switch to this.cardsLeft along with shift() above, in case there is a burn card implemented...
 			while (length--) {
 				i = (Math.random() * length | 0) ;
 				tmp = this.cards[i];
