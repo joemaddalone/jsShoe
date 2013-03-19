@@ -6,17 +6,17 @@
 */
 
 var Deck = function (deckCount) {
-	this.count = (51 * deckCount)+deckCount; //example: deck=0-51  * 2 = 102 + 2<--deckCount = 204
+	this.count = (52 * deckCount)
 	this.cards = new Array(this.count);
 	for (var i = this.count; i--;) {
-		this.cards[i] = i + 1;	//not creating a card at this point, just storing it's position which can later be evaluated
+		this.cards[i] = i + 1;
 	}
 };
 
 Deck.prototype = {
 	cardsLeft: function(){return this.cards.length}, 
-	nextCard : function(){if (this.cardsLeft() > 0){return this.cards.pop();} else {return null};},  //might use shift instead of pop here
-	dealCard : function(playerHand){if (this.cardsLeft() > 0){playerHand.push(this.cards.pop());} else {return null};},   //might use shift instead of pop here
+	nextCard : function(){return this.cardsLeft() > 0 ? this.cards.pop() : null},
+	dealCard: function (playerHand) { return this.cardsLeft() > 0 ? playerHand.push(this.cards.pop()) : null ; },
 	shuffle: function(n) {
 		var i;
 		var tmp;
@@ -100,4 +100,3 @@ Card.prototype = {
 		},
 		info: function(){return this.faceValue() + ' of ' + this.suit()}
 };
-
