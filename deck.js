@@ -15,12 +15,11 @@ var Deck = function (deckCount) {
 
 Deck.prototype = {
 	cardsLeft: function(){return this.cards.length}, 
-	nextCard : function(){return this.cardsLeft() > 0 ? this.cards.pop() : null},
-	dealCard: function (playerHand) { return this.cardsLeft() > 0 ? playerHand.push(this.cards.pop()) : null ; },
+	nextCard : function(){return this.cardsLeft() > 0 ? new Card(this.cards[this.cardsLeft()-1]) : null},
+	dealCard: function () {return this.cardsLeft() > 0 ? this.cards.pop() : null ; },
 	shuffle: function(n) {
-		var i;
-		var tmp;
-		for(var x=0;x<n;x++)
+		var i,tmp,x;
+		for(x=0;x<n;x++)
 		{
 			length = this.cards.length;
 			while (length--) {

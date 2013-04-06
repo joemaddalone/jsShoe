@@ -13,62 +13,56 @@
 <body>
 <button onClick="newDeck(1,0)">New Deck</button>
 <button onClick="shoe.shuffle(4);showCurrent()">Shuffle</button>
-<button onClick="shoe.dealCard(hand);showCurrent();">Deal 1 Card</button>
+<button onClick="dealCard(hand)">Deal 1 Card</button>
 <hr />
 
 <div id="sHolder">
-<h2>Shoe</h2>
-<ol id="shoe"></ol>
+	<h2>Shoe</h2>
+		<ol id="shoe"></ol>
 </div>
 <div id="hHolder">
-<h2>Hand</h2>
-<ol id="hand"></ol>
+	<h2>Hand</h2>
+	<ol id="hand"></ol>
 </div>
 <script type="text/javascript" src="deck.js"></script>
 <script type="text/javascript">
-var shoe
-var hand
-function newDeck(deckCount,shuffle){
-	shoe = new Deck(deckCount);
-	shoe.shuffle(shuffle)
-	hand=[]
-	showCurrent()
-}
+	var shoe
+	var hand
+	function newDeck(deckCount,shuffle){
+		shoe = new Deck(deckCount);
+		shoe.shuffle(shuffle)
+		hand=[]
+		showCurrent()
+	}
 
+	function showCurrent(){
+		var count = shoe.cardsLeft();
+		var inHand = hand.length;
+		var tmp=[];
+		var myHand=[];
+		var thiscard
+		var x = document.getElementById("shoe")
+		var y = document.getElementById("hand")
+		x.innerHTML='';
+		y.innerHTML='';
+		for (var i = 0; i < count; i++){
+			thiscard = new Card(shoe.cards[i])
+			tmp.push('<li>' + thiscard.faceValue() + ' of ' + thiscard.suit() + '</li>')
+		}
+		x.innerHTML=tmp.join('')
+		for (var h = 0; h < inHand; h++){
+			thiscard = new Card(hand[h])
+			myHand.push('<li>' + thiscard.faceValue() + ' of ' + thiscard.suit() + '</li>')
+		}
+		y.innerHTML=myHand.join('')
+	}
 
+	function dealCard(){
+		hand.push(shoe.dealCard());
+		showCurrent()
+	}
 
-
-
-function showCurrent()
-{
-	var count = shoe.cardsLeft();
-	var inHand = hand.length;
-	var tmp=[];
-	var myHand=[];
-	var thiscard
-	var x = document.getElementById("shoe")
-	var y=document.getElementById("hand")
-	x.innerHTML='';
-	y.innerHTML='';
-    for (var i = 0; i < count; i++)
-    {
-        thiscard = new Card(shoe.cards[i])
-		tmp.push('<li>' + thiscard.faceValue() + ' of ' + thiscard.suit() + '</li>')
-    }
-	x.innerHTML=tmp.join('')
-    for (var h = 0; h < inHand; h++)
-    {
-        thiscard = new Card(hand[h])
-		myHand.push('<li>' + thiscard.faceValue() + ' of ' + thiscard.suit() + '</li>')
-    }
-	y.innerHTML=myHand.join('')
-}
-
-
-
-
-window.onload=newDeck(1,0);
-
+	window.onload=newDeck(1,0);
 </script>
 </body>
 </html>
